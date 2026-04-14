@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
   template: `
    <router-outlet></router-outlet>
   `,
-  styles:[':host { display: block; }'],
+  styles:[':host { display: block; height: 100%;}'],
 })
 export class AppComponent {
 

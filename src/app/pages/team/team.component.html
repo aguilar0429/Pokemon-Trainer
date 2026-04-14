@@ -1,1 +1,69 @@
-<p>team works!</p>
+<app-loading-screen [visible]="showLoading" message="Cargando..."></app-loading-screen>
+<app-navbar></app-navbar>
+
+<div class="page-container">
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">¡Ya casi terminamos!</h1>
+            <p class="page-subtitle">Revisa la información, y completa lo solicitado.</p>
+        </div>
+    </div>
+
+    <div class="content-grid">
+        <!-- Left: Trainer preview card -->
+       <div class="card-column">
+              <app-tarjeta-entrenador [profile]="perfil" [showNameTop]="true" [showInfo]="true"></app-tarjeta-entrenador> 
+        </div>
+
+        <!-- Right: Pokemon selection -->
+        <div class="pokemon-section">
+            <h2 class="section-title">Pokémon</h2>
+            <p class="section-subtitle">Selecciona 3 Pokémon para que sean parte de tu equipo</p>
+
+            <!-- Search bar -->
+            <div class="search-bar">
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A8A99"
+                    stroke-width="2">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.35-4.35" />
+                </svg>
+                <input type="text" [(ngModel)]="busqueda" (input)="onSearch()"
+                    placeholder="Buscar por índice, nombre..." class="search-input" />
+            </div>
+
+            <!-- Loading state -->
+            <div class="loading-container" *ngIf="loading">
+                <img src="loading.gif" alt="Loading..." class="loading-gif-inline" />
+                <p>Cargando Pokémon...</p>
+            </div>
+
+            <!-- Error state -->
+            <div class="error-container" *ngIf="error">
+                <p>Error al cargar los Pokémon</p>
+                <button class="btn-retry" (click)="loadPokemon()">Reintentar</button>
+            </div>
+
+            <!-- Pokemon grid -->
+            <div class="pokemon-grid" *ngIf="!loading && !error">
+                <div *ngFor="let pokemon of pokemonFiltrados" class="pokemon-card"
+                    [class.selected]="isSelected(pokemon)" (click)="toggleSelect(pokemon)">
+                    
+                        <img [src]="pokemon.sprite" [alt]="pokemon.nombre" class="pokemon-sprite" loading="lazy"
+                        *ngIf="pokemon.sprite" />
+                        <div class="pokemon-tag" [class.tag-selected]="isSelected(pokemon)">
+                            {{ formatId(pokemon.id) }} {{ mayus(pokemon.nombre) }}
+                        </div>
+                  
+                    
+                </div>
+            </div>
+            
+            <!-- Actions -->
+            <div class="form-actions">
+                <button class="btn-primary" [disabled]="equipoSeleccionado.length !== 3" (click)="onSave()">
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

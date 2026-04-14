@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component,Input } from '@angular/core';
 
 //loading screen with gif
 @Component({
   selector: 'app-loading-screen',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './loading-screen.component.html',
   styleUrl: './loading-screen.component.scss'
 })

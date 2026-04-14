@@ -7,13 +7,19 @@ import { TrainerService } from '../../services/trainer.service';
 import { TrainerProfile } from '../../models/trainer.model';
 import { MatIconModule } from '@angular/material/icon';
 import { LoadingScreenComponent } from '../../components/loading-screen/loading-screen.component';
-
+const HOBBY_SUGGESTIONS = [
+  'Jugar Fútbol', 'Jugar Basquetball', 'Jugar Tennis',
+  'Jugar Voleibol', 'Jugar Fifa', 'Jugar Videojuegos',
+  'Ver Series', 'Ver Películas', 'Leer', 'Cocinar'
+];
 @Component({
   selector: 'app-profile-form',
+  standalone: true,
   imports: [ReactiveFormsModule, NavbarComponent,CommonModule,MatIconModule,LoadingScreenComponent],
   templateUrl: './profile-form.component.html',
   styleUrl: './profile-form.component.scss'
 })
+
 export class ProfileFormComponent implements OnInit{
   form!: FormGroup;
   fotoUrl = '';
@@ -46,6 +52,16 @@ export class ProfileFormComponent implements OnInit{
       this.validarDUI(val);
     });
 
+    this.form.get('hobby')!.valueChanges.subscribe((val) => {
+      if (val && !this.selectedHobby) {
+        this.hobbySuggestions = HOBBY_SUGGESTIONS.filter(h =>
+          h.toLowerCase().includes(val.toLowerCase())
+        );
+        this.showSuggestions = this.hobbySuggestions.length > 0;
+      } else {
+        this.showSuggestions = false;
+      }
+    });
 
     // Pre fill form if editing
     const profile = this.trainerService.profile;
@@ -135,13 +151,27 @@ export class ProfileFormComponent implements OnInit{
       fotoUrl: this.fotoUrl,
       fotoNombre: this.fotoNombre
     };
-
     this.trainerService.setPerfil(profile);
     this.showLoading = true;
     // Show loading for at least 0.5s so the gif is visible
     setTimeout(() => {
       this.router.navigate(['/team']);
     }, 500);
+  }
+
+  esconder(): void {
+    // Delay to allow click on suggestion
+    setTimeout(() => this.showSuggestions = false, 200);
+  }
+
+  selecccionarHobby(hobby: string): void {
+    this.selectedHobby = hobby;
+    this.form.get('hobby')!.setValue('');
+    this.showSuggestions = false;
+  }
+
+  borrarHobby(): void {
+    this.selectedHobby = '';
   }
 
 }
