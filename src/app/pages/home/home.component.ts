@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit{
 
   editProfile(): void {
     this.showLoading = true;
-    setTimeout(() => this.router.navigate(['/profile']), 500);
+    setTimeout(() => this.router.navigate(['/profile'], { queryParams: { from: 'home' } }), 500);
   }
 
   editTeam(): void {

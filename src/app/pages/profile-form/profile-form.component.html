@@ -4,6 +4,10 @@
 <div class="page-container">
   <div class="page-header">
     <div>
+      <mat-icon class="chev-left" *ngIf="ifEdit" (click)="regresar()">chevron_left</mat-icon>
+    </div>
+
+    <div>
       <h1 class="page-title"><strong>¡Hola!</strong> Configuremos tu perfil</h1>
       <p class="page-subtitle">Queremos conocerte mejor.</p>
     </div>

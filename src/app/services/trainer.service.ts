@@ -49,18 +49,17 @@ export class TrainerService {
 
   setPerfil(profile: TrainerProfile): void {
     this.profileSubject.next(profile);
-    localStorage.setItem(this.PROFILE_KEY, JSON.stringify(profile));
+    sessionStorage.setItem(this.PROFILE_KEY, JSON.stringify(profile));
   }
 
   setEquipo(team: Pokemon[]): void {
     this.teamSubject.next(team);
-    console.log(team);
-    localStorage.setItem(this.TEAM_KEY, JSON.stringify(team));
+    sessionStorage.setItem(this.TEAM_KEY, JSON.stringify(team));
   }
 
   private loadPerfil(): TrainerProfile | null {
     try {
-      const data = localStorage.getItem(this.PROFILE_KEY);
+      const data = sessionStorage.getItem(this.PROFILE_KEY);
       return data ? JSON.parse(data) : null;
     } catch {
       return null;
@@ -69,7 +68,7 @@ export class TrainerService {
 
   private loadEquipo(): Pokemon[] {
     try {
-      const data = localStorage.getItem(this.TEAM_KEY);
+      const data = sessionStorage.getItem(this.TEAM_KEY);
       return data ? JSON.parse(data) : [];
     } catch {
       return [];

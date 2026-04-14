@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TrainerService } from '../../services/trainer.service';
 import { TrainerProfile } from '../../models/trainer.model';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,12 +15,12 @@ const HOBBY_SUGGESTIONS = [
 @Component({
   selector: 'app-profile-form',
   standalone: true,
-  imports: [ReactiveFormsModule, NavbarComponent,CommonModule,MatIconModule,LoadingScreenComponent],
+  imports: [ReactiveFormsModule, NavbarComponent, CommonModule, MatIconModule, LoadingScreenComponent, MatIconModule],
   templateUrl: './profile-form.component.html',
   styleUrl: './profile-form.component.scss'
 })
 
-export class ProfileFormComponent implements OnInit{
+export class ProfileFormComponent implements OnInit {
   form!: FormGroup;
   fotoUrl = '';
   fotoNombre = '';
@@ -32,14 +32,17 @@ export class ProfileFormComponent implements OnInit{
   fechaHoy = new Date().toISOString().split('T')[0];
   showLoading = false;
   cumpleFocused = false;
+  ifEdit = false;
 
   constructor(
+    private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router,
     private trainerService: TrainerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    this.ifEdit = this.route.snapshot.queryParamMap.get('from') === 'home';
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       hobby: [''],
@@ -94,7 +97,7 @@ export class ProfileFormComponent implements OnInit{
     docControl.updateValueAndValidity();
   }
 
-   fotoSeleccion(event: Event): void {
+  fotoSeleccion(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
       const file = input.files[0];
@@ -172,6 +175,11 @@ export class ProfileFormComponent implements OnInit{
 
   borrarHobby(): void {
     this.selectedHobby = '';
+  }
+
+  regresar(): void {
+    this.showLoading = true;
+    setTimeout(() => this.router.navigate(['/home']), 500);
   }
 
 }
