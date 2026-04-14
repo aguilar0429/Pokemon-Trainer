@@ -1,0 +1,338 @@
+// Profile form page styles
+.page-container {
+  max-width: 1100px;
+  margin: 0 100px;
+  padding: 32px 24px;
+}
+
+.page-header {
+  display: flex;
+  align-items: flex-start;
+  
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.back-arrow {
+  font-size: 24px;
+  color: #1A3A4A;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 4px;
+  &:hover { color: #2B6CB0; }
+}
+
+.page-title {
+  font-size: 35px;
+  font-weight: 700;
+  color: #185A7D;
+  margin: 0;
+}
+
+.page-subtitle {
+  font-size: 18px;
+  color: #7A8A99;
+  margin: 4px 0 0;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;          
+  align-items: flex-start;
+  margin-top:10px;
+  margin-left:70px;
+
+}
+
+.photo-card {
+  background: #FFC600;
+  border-radius: 50px;  
+  padding: 28px 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  text-align: center;
+  max-width: 350px;   
+  height: 90%;   
+  margin-left: 15px;
+}
+
+.photo-card-title {
+  font-size: 30px;
+  font-weight: 400;
+  color: black;
+  margin: 10px 0 40px;
+}
+
+.photo-circle-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+
+}
+
+.photo-ring {
+  width: 220px;          
+  height: 220px;
+  border-radius: 50%;
+  border: 14px solid rgba(255,255,255,0.8);
+  overflow: hidden;
+  background: #E7EFF5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;       
+}
+
+.photo-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width:100%;
+  height:100%;
+  padding:120px 0 0 0;
+
+  mat-icon{
+    height:100%;
+    width:100%;
+  }
+  
+}
+
+.filename-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin-top: 30px;
+  height: 10%;
+}
+
+.filename {
+  font-size: 14px;
+  color: #2C85BC;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.delete-photo-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.photo-error {
+  color: #E53935;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+// Form section
+.form-section {
+  padding-top: 8px;
+  width: 100%;  
+  justify-items: center;
+}
+
+.form-contents{
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+
+.section-title {
+  font-size: 30px;
+  font-weight: 400;
+  color: #01426A;
+  margin: 0 0 4px;
+}
+
+.section-subtitle {
+  font-size: 18px;
+  color: #7A8A99;
+  margin: 0 0 24px;
+}
+
+// Floating label form fields
+.form-field {
+  position: relative;
+  margin-bottom: 25px;
+
+  input {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 15px;
+    border: 1.5px solid #C0C0C0;   
+    border-radius: 8px;
+    outline: none;
+    background: #fff;
+    color: #1A3A4A;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+
+    &:focus {
+      border-color: #01426A;
+    }
+  }
+
+  label {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 15px;
+    color: #7A8A99;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    background: #fff;
+    padding: 0 4px;
+  }
+
+  input:focus + label,
+  input:not(:placeholder-shown) + label,
+  &.has-value label {
+    top: 0;
+    font-size: 11px;
+    color: #2E6B75;
+  }
+
+  input:focus + label {
+    color: #01426A;
+  }
+
+  &.error {
+    input { border-color: #E53935; }
+    label { color: #E53935; }
+  }
+}
+.field-error {
+  display: block;
+  font-size: 12px;
+  color: #E53935;
+  margin-top: 4px;
+  padding-left: 4px;
+}
+
+// Hobby autocomplete
+.hobby-wrapper {
+  display: flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 0;
+}
+
+.hobby-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #1A3A4A;
+  color: #fff;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 14px;
+  margin: 8px 0 8px 12px;
+}
+
+.chip-remove {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+  line-height: 1;
+}
+
+.suggestions-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1.5px solid #E0E0E0;
+  border-radius: 0 0 8px 8px;
+  list-style: none;
+  margin: -2px 0 0;
+  padding: 0;
+  z-index: 10;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+  li {
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #1A3A4A;
+
+    &:hover {
+      background: #F0F2F5;
+    }
+  }
+}
+
+// Actions
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.btn-primary {
+  width: 100%;
+  max-width: 220px;      
+  padding: 14px 48px;
+  background: #E6E6E6;   // ← starts disabled/gray like in image
+  color: #868686;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top:30px;
+
+  &:not(:disabled) {
+    background: #01426A;
+    color:#fff
+  }
+
+  &:disabled {
+    background: #E6E6E6;
+    cursor: not-allowed;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+
+.icons{
+  font-size: 100px;
+  color:#9BB8D3;
+}
+.cloud-icon{
+  color:#2C85BC;
+}
+.delete-icon{
+  color: #DF1C24;
+}
+

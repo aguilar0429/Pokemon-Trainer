@@ -1,0 +1,101 @@
+<app-loading-screen [visible]="showLoading" message="Cargando..."></app-loading-screen>
+<app-navbar></app-navbar>
+
+<div class="page-container">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title"><strong>¡Hola!</strong> Configuremos tu perfil</h1>
+      <p class="page-subtitle">Queremos conocerte mejor.</p>
+    </div>
+  </div>
+
+  <div class="content-grid">
+    <!-- Left: Photo upload card -->
+    <div class="photo-card">
+      <h3 class="photo-card-title">Imagen perfil</h3>
+
+      <div class="photo-circle-wrapper" >
+        <div class="photo-ring">
+          <img *ngIf="fotoUrl" [src]="fotoUrl" alt="Foto de Perfil" class="photo-preview" />
+          <div *ngIf="!fotoUrl" class="photo-placeholder">
+            <mat-icon class ="icons">person</mat-icon>
+          </div>
+        </div>
+      </div>
+
+      <input #fileInput type="file" accept="image/jpeg,image/jpg,image/png"
+             (change)="fotoSeleccion($event)" hidden />
+
+      <div class="filename-bar" (click)="fileInput.click()">
+        <span class="filename">{{ fotoNombre }}</span>
+        <button class="delete-photo-btn" (click)="borrarFoto()" aria-label="Borrar foto">
+          <mat-icon class = "cloud-icon" *ngIf="!fotoNombre">cloud_upload</mat-icon>
+          <mat-icon *ngIf="fotoNombre" class ="delete-icon">delete</mat-icon>
+        </button>
+      </div>
+
+      <p class="photo-error" *ngIf="fotoError">La foto es requerida</p>
+    </div>
+
+    <!-- Right: Form -->
+    <div class="form-section">
+      <div class = "form-contents">
+        <h2 class="section-title">Tu información</h2>
+        <p class="section-subtitle">Completa la siguiente información para completar tu perfil</p>
+
+        <form [formGroup]="form" (ngSubmit)="onContinue()">
+          <!-- Name field -->
+          <div class="form-field" [class.has-value]="form.get('name')!.value"
+              [class.error]="form.get('name')!.touched && form.get('name')!.invalid">
+            <input type="text" formControlName="name" id="name" placeholder=" " />
+            <label for="name">Nombre*</label>
+            <span class="field-error" *ngIf="form.get('name')!.touched && form.get('name')!.hasError('required')">
+              El nombre es requerido
+            </span>
+            <span class="field-error" *ngIf="form.get('name')!.touched && form.get('name')!.hasError('minlength')">
+              Mínimo 2 caracteres
+            </span>
+          </div>
+
+          <div class="form-field" [class.has-value]="form.get('hobby')!.value">
+              <input type="text" formControlName="hobby" id="hobby" placeholder=" " />
+              <label for="hobby">Pasatiempo favorito</label>
+          </div>
+
+          <!-- Birthday field -->
+          <div class="form-field" [class.has-value]="form.get('birthday')!.value"
+              [class.error]="form.get('birthday')!.touched && form.get('birthday')!.invalid">
+            <input type="date" formControlName="birthday" id="birthday" placeholder=" "
+                  [max]="fechaHoy" />
+            <label for="birthday">Cumpleaños*</label>
+            <span class="field-error" *ngIf="form.get('birthday')!.touched && form.get('birthday')!.hasError('required')">
+              La fecha de nacimiento es requerida
+            </span>
+          </div>
+
+          <!-- Document field (DUI or Carnet) -->
+          <div class="form-field" [class.has-value]="form.get('document')!.value"
+              [class.error]="form.get('document')!.touched && form.get('document')!.invalid">
+            <input type="text" formControlName="document" id="document" placeholder=" "
+                  (input)="onDocumentInput($event)"
+                  [attr.maxlength]="esAdulto ? 10 : null" />
+            <label for="document">{{ esAdulto ? 'Documento*' : 'Carnet de Minoridad' }}</label>
+            <span class="field-error"
+                  *ngIf="esAdulto && form.get('document')!.touched && form.get('document')!.hasError('required')">
+              El DUI es requerido
+            </span>
+            <span class="field-error"
+                  *ngIf="esAdulto && form.get('document')!.touched && form.get('document')!.hasError('pattern')">
+              Formato de DUI inválido (XXXXXXXX-X)
+            </span>
+          </div>
+          <div class="form-actions">
+              <button type="submit" class="btn-primary" [disabled]="form.invalid || !fotoUrl">
+                  Continuar
+              </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
