@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatIcon } from "@angular/material/icon";
 
 @Component({
   selector: 'app-navbar',
-  imports: [CommonModule],
+  standalone:true,
+  imports: [CommonModule, MatIcon],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })

@@ -1,0 +1,44 @@
+<app-loading-screen [visible]="showLoading" message="Cargando..."></app-loading-screen>
+<app-navbar [trainerName]="firstName"></app-navbar>
+
+<div class="page-container">
+    <!-- Greeting header -->
+    <div class="greeting-header">
+        <h1 class="greeting">¡Hola {{ firstName }}!</h1>
+        <button class="btn-edit-outline" (click)="editProfile()">
+            <mat-icon>edit</mat-icon> Editar perfil
+        </button>
+    </div>
+
+    <div class="content-grid">
+        <!-- Left: Trainer card -->
+        <div class="card-column">
+            <app-tarjeta-entrenador [profile]="profile" [showBadge]="true" [showInfo]="true"></app-tarjeta-entrenador>
+        </div>
+
+        <!-- Right: Pokemon team -->
+        <div class="pokemon-section">
+            <div class="section-header">
+                <h2 class="section-title">Mis Pokémon</h2>
+                <button class="btn-edit-outline" (click)="editTeam()">
+                    <mat-icon>edit</mat-icon> Editar
+                </button>
+            </div>
+
+            <div class="pokemon-cards">
+                <div *ngFor="let pokemon of team" class="pokemon-detail-card">
+                    <div class="pokemon-info">
+                        <img [src]="pokemon.sprite" [alt]="pokemon.nombre" class="pokemon-sprite" />
+                        <h3 class="pokemon-name">{{ mayus(pokemon.nombre) }}</h3>
+                        <p class="pokemon-types">{{ pokemon.tipoSpanish.join('/') }}</p>
+                    </div>
+                    <div class="pokemon-stats">
+                        <app-stat-bar *ngFor="let stat of pokemon.stats" [label]="stat.label" [value]="stat.statBase"
+                            [max]="stat.maxStat" [color]="getColorBarra(pokemon)">
+                        </app-stat-bar>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

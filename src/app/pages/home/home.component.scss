@@ -1,0 +1,140 @@
+// Dashboard page styles
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.greeting-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.greeting {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1A3A4A;
+  margin: 0;
+}
+
+.btn-edit-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1.5px solid #01426a;
+  color: #01426a;
+  background: #fff;
+  border-radius: 10px;
+  padding: 0px 20px 0px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  min-height: 30px;
+
+  &:hover {
+    background: #EBF4FF;
+  }
+  mat-icon{
+    height:100%;
+    font-size:14px;
+  }
+}
+
+.edit-icon {
+  font-size: 14px;
+}
+
+.content-grid {
+  margin-top:60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+.card-column {
+  position: sticky;
+  top: 24px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #2E6B75;
+  margin: 0;
+}
+
+// Pokemon detail cards
+.pokemon-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pokemon-detail-card {
+  display: flex;
+  gap: 24px;
+  background: #F2F2F2;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  align-items: center;
+}
+
+.pokemon-info {
+  flex-shrink: 0;
+  text-align: center;
+  min-width: 120px;
+}
+
+.pokemon-sprite {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+.pokemon-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1A3A4A;
+  margin: 8px 0 2px;
+}
+
+.pokemon-types {
+  font-size: 13px;
+  color: #7A8A99;
+  margin: 0;
+}
+
+.pokemon-stats {
+  flex: 1;
+  padding: 4px 0;
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .pokemon-detail-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .pokemon-stats {
+    width: 100%;
+  }
+}

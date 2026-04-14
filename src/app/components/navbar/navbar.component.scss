@@ -1,46 +1,70 @@
 .navbar {
-      position: relative;
-      background: #fff;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    }
-    .navbar-gradient {
-      height: 4px;
-      background: linear-gradient(90deg, #2E6B75, #4ECDC4, #2E6B75);
-    }
-    .navbar-content {
-      max-width: 1100px;
-      margin: 0 20px;
-      padding: 12px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .navbar-logo {
-      height: 40px;
-      object-fit: contain;
-    }
-    .navbar-right {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .user-dropdown {
-      border: 1.5px solid #01426A;
-      border-radius: 8px;
-      padding: 8px 20px;
-      background: #fff;
-      font-size: 14px;
-      color: #01426A;
-      cursor: pointer;
-      font-weight: 500;
-      font-weight: bold;
-      
-    }
-    .user-dropdown:hover { border-color: #2B6CB0; }
-    .chevron { margin-top: 2px;  padding-top: 5px;}
-    .search-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-    }
+  position: relative;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  overflow: hidden;              // ← prevents navbar from overflowing
+}
+
+.navbar-gradient {
+  height: 4px;
+  background: linear-gradient(90deg, #2E6B75, #4ECDC4, #2E6B75);
+}
+
+.navbar-content {
+  width: 100%;
+  margin: 0 20px;
+  padding: 12px 40px; 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.navbar-logo {
+  height: 40px;
+  object-fit: contain;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.user-dropdown {
+  border: 1.5px solid #01426A;
+  border-radius: 8px;
+  padding: 8px 20px;
+  background: #fff;
+  font-size: 14px;
+  color: #01426A;
+  cursor: pointer;
+  font-weight: 500;
+  font-weight: bold;
+  
+  mat-icon {
+    height: 100%;
+    margin-bottom: -3px;
+  }
+}
+
+.user-dropdown:hover {
+  border-color: #2B6CB0;
+}
+
+.chevron {
+  height: 100%;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.search-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.search-icon {
+  color: #01426A;
+}

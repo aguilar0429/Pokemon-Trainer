@@ -59,6 +59,7 @@ export class TeamComponent implements OnInit {
         this.loading = false;
       }
     });
+    
   }
 
   onSearch(): void {
@@ -100,7 +101,7 @@ export class TeamComponent implements OnInit {
     this.trainerService.setEquipo(this.equipoSeleccionado);
     this.showLoading = true;
     setTimeout(() => {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/home']);
     }, 500);
   }
 

@@ -54,6 +54,7 @@ export class TrainerService {
 
   setEquipo(team: Pokemon[]): void {
     this.teamSubject.next(team);
+    console.log(team);
     localStorage.setItem(this.TEAM_KEY, JSON.stringify(team));
   }
 

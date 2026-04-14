@@ -8,16 +8,16 @@ import { Pokemon, STAT_MAX, TYPE_TRANSLATIONS, TYPE_COLORS } from '../models/pok
 export class PokemonService {
   private readonly API_BASE = 'https://pokeapi.co/api/v2';
   private cache = new Map<number, Pokemon>();
-  private pokemon$: Observable<Pokemon[]> | null = null;
+  private pokemon: Observable<Pokemon[]> | null = null;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // Fetch all 151 Gen 1 pokemon
   getAllGen1Pokemon(): Observable<Pokemon[]> {
-    
-    if (this.pokemon$) return this.pokemon$;
-    
-    this.pokemon$ = this.http
+
+    if (this.pokemon) return this.pokemon;
+
+    this.pokemon = this.http
       .get<{ results: { name: string; url: string }[] }>(`${this.API_BASE}/pokemon?limit=151`)
       .pipe(
         map((res) => res.results.map((_, i) => i + 1)),
@@ -37,8 +37,7 @@ export class PokemonService {
         retry(2),
         shareReplay(1)
       );
-      
-    return this.pokemon$;
+    return this.pokemon;
   }
 
   // Fetch a single pokemon
@@ -63,7 +62,7 @@ export class PokemonService {
 
   // Map API response to our pokemon model
   private mapToPokemon(data: any): Pokemon {
-    const tipos = data.types.map((t: any) => t.type.nombre);
+    const tipos = data.types.map((t: any) => t.type.name);
     return {
       id: data.id,
       nombre: data.name,
@@ -74,7 +73,7 @@ export class PokemonService {
         const statInfo = STAT_MAX[s.stat.name] || { max: 100, label: s.stat.name };
         return {
           nombre: s.stat.name,
-          baseStat: s.base_stat,
+          statBase: s.base_stat,
           maxStat: statInfo.max,
           label: statInfo.label,
         };
