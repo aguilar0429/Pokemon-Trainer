@@ -50,14 +50,11 @@
             <div class="pokemon-grid" *ngIf="!loading && !error">
                 <div *ngFor="let pokemon of pokemonFiltrados" class="pokemon-card"
                     [class.selected]="isSelected(pokemon)" (click)="toggleSelect(pokemon)">
-
                     <img [src]="pokemon.sprite" [alt]="pokemon.nombre" class="pokemon-sprite" loading="lazy"
                         *ngIf="pokemon.sprite" />
                     <div class="pokemon-tag" [class.tag-selected]="isSelected(pokemon)">
                         {{ formatId(pokemon.id) }} {{ mayus(pokemon.nombre) }}
                     </div>
-
-
                 </div>
             </div>
 

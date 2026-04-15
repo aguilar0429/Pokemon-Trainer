@@ -3,19 +3,18 @@ import { FormsModule } from '@angular/forms';
 import { LoadingScreenComponent } from "../../components/loading-screen/loading-screen.component";
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { TarjetaEntrenadorComponent } from '../../components/tarjeta-entrenador/tarjeta-entrenador.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TrainerService } from '../../services/trainer.service';
 import { PokemonService } from '../../services/pokemon.service';
 import { TrainerProfile } from '../../models/trainer.model';
 import { Pokemon } from '../../models/pokemon.model';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-team',
   standalone: true,
-  imports: [CommonModule, FormsModule, LoadingScreenComponent, NavbarComponent, LoadingScreenComponent, TarjetaEntrenadorComponent,MatIconModule],
+  imports: [CommonModule, FormsModule, LoadingScreenComponent, NavbarComponent, TarjetaEntrenadorComponent, MatIconModule],
   templateUrl: './team.component.html',
   styleUrl: './team.component.scss'
 })
@@ -28,15 +27,18 @@ export class TeamComponent implements OnInit {
   loading = true;
   error = false;
   showLoading = false;
+  fromHome = false;
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private trainerService: TrainerService,
     private pokemonService: PokemonService
   ) { }
 
   ngOnInit(): void {
     this.perfil = this.trainerService.profile;
+    this.fromHome = this.route.snapshot.queryParamMap.get('from') === 'home';
 
     // Restore previously selected team if editing
     const existingTeam = this.trainerService.team;
@@ -60,7 +62,6 @@ export class TeamComponent implements OnInit {
         this.loading = false;
       }
     });
-    
   }
 
   onSearch(): void {
@@ -69,8 +70,9 @@ export class TeamComponent implements OnInit {
       this.pokemonFiltrados = this.pokemons;
       return;
     }
+
     this.pokemonFiltrados = this.pokemons.filter(p =>
-      p.nombre.toLowerCase().includes(q) || p.id.toString() === q || this.formatId(p.id).includes(q) 
+      p.nombre.toLowerCase().includes(q) || p.id.toString() === q || this.formatId(p.id).includes(q)
     );
   }
 
@@ -109,7 +111,7 @@ export class TeamComponent implements OnInit {
   regresar(): void {
     this.showLoading = true;
     setTimeout(() => {
-      this.router.navigate(['/profile']);
+      this.router.navigate([this.fromHome ? '/home' : '/profile']);
     }, 500);
   }
 }

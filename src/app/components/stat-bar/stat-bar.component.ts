@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './stat-bar.component.html',
-  styleUrl: './stat-bar.component.scss'
+  styleUrls: ['./stat-bar.component.scss']
 })
 export class StatBarComponent {
   @Input() label = '';
@@ -15,6 +15,11 @@ export class StatBarComponent {
   @Input() color = '#4CAF50';
 
   get percentage(): number {
-    return Math.min((this.value / this.max) * 100, 100);
+    if (!this.max || this.max <= 0) {
+      return 0;
+    }
+
+    const percent = (this.value / this.max) * 100;
+    return Math.min(Math.max(Number(percent.toFixed(2)), 0), 100);
   }
 }

@@ -67,7 +67,7 @@
                 <button type="button" class="chip-remove" (click)="borrarHobby()" aria-label="Remove hobby">✕</button>
               </span>
               <input *ngIf="!selectedHobby" type="text" formControlName="hobby" id="hobby" placeholder=" "
-                (blur)="esconder()" (focus)="showSuggestions =true" />
+                (blur)="esconder()" (focus)="showHobbySuggestions()" />
             </div>
             <label for="hobby">Pasatiempo favorito</label>
             <ul class="suggestions-dropdown" *ngIf="showSuggestions && !selectedHobby">
@@ -90,7 +90,7 @@
           <div class="form-field" [class.has-value]="form.get('document')!.value"
             [class.error]="form.get('document')!.touched && form.get('document')!.invalid">
             <input type="text" formControlName="document" id="document" placeholder=" "
-              (input)="onDocumentInput($event)" [attr.maxlength]="esAdulto ? 10 : null" />
+              (input)="onDocumentInput($event)" maxlength="10" />
             <label for="document">{{ esAdulto ? 'Documento*' : 'Carnet de Minoridad' }}</label>
             <span class="field-error"
               *ngIf="esAdulto && form.get('document')!.touched && form.get('document')!.hasError('required')">
@@ -103,7 +103,7 @@
           </div>
           <div class="form-actions">
             <button type="submit" class="btn-primary" [disabled]="form.invalid || !fotoUrl">
-              Continuar
+              {{ ifEdit ? 'Guardar' : 'Continuar' }}
             </button>
           </div>
         </form>

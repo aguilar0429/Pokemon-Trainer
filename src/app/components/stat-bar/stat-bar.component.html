@@ -1,7 +1,7 @@
 <div class="stat-row">
     <span class="stat-label">{{ label }}</span>
     <div class="stat-bar-bg">
-        <div class="stat-bar-fill" [style.width.%]="percentage" [style.background]="color">
-        </div>
+        <div class="stat-bar-fill" [style.width]="percentage + '%'" [style.background]="color"></div>
+        <div class="stat-tooltip">Base {{ value }} / Max {{ max }}</div>
     </div>
 </div>

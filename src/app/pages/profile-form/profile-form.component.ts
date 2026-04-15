@@ -60,13 +60,11 @@ export class ProfileFormComponent implements OnInit {
     });
 
     this.form.get('hobby')!.valueChanges.subscribe((val) => {
-      if (val && !this.selectedHobby) {
-        this.hobbySuggestions = HOBBY_SUGGESTIONS.filter(h =>
-          h.toLowerCase().includes(val.toLowerCase())
-        );
+      if (!this.selectedHobby) {
+        this.hobbySuggestions = val
+          ? HOBBY_SUGGESTIONS.filter(h => h.toLowerCase().includes(val.toLowerCase()))
+          : [...HOBBY_SUGGESTIONS];
         this.showSuggestions = this.hobbySuggestions.length > 0;
-      } else {
-        this.showSuggestions = false;
       }
     });
 
@@ -74,10 +72,10 @@ export class ProfileFormComponent implements OnInit {
     const profile = this.trainerService.profile;
     if (profile) {
       this.form.patchValue({
-        nombre: profile.nombre,
+        name: profile.nombre,
         hobby: profile.hobby,
-        cumple: profile.cumple,
-        documento: profile.documento
+        birthday: profile.cumple,
+        document: profile.documento
       });
       this.nombre = profile.nombre;
       this.selectedHobby = profile.hobby || '';
@@ -125,7 +123,6 @@ export class ProfileFormComponent implements OnInit {
 
   // Auto format DUI with hyphen after 8th digit
   onDocumentInput(event: Event): void {
-    if (!this.esAdulto) return;
     const input = event.target as HTMLInputElement;
     let value = input.value.replace(/[^0-9]/g, '');
     if (value.length > 9) value = value.substring(0, 9);
@@ -162,9 +159,29 @@ export class ProfileFormComponent implements OnInit {
     this.trainerService.setPerfil(profile);
     this.showLoading = true;
     // Show loading for at least 0.5s so the gif is visible
-    setTimeout(() => {
-      this.router.navigate(['/team']);
-    }, 500);
+    if (this.ifEdit) {
+      setTimeout(() => {
+        this.router.navigate(['/home']);
+      }, 500);
+    }else{
+      setTimeout(() => {
+        this.router.navigate(['/team']);
+      }, 500);
+    }
+
+  }
+
+  showHobbySuggestions(): void {
+    if (this.selectedHobby) {
+      this.showSuggestions = false;
+      return;
+    }
+
+    const value = this.form.get('hobby')!.value || '';
+    this.hobbySuggestions = value
+      ? HOBBY_SUGGESTIONS.filter(h => h.toLowerCase().includes(value.toLowerCase()))
+      : [...HOBBY_SUGGESTIONS];
+    this.showSuggestions = this.hobbySuggestions.length > 0;
   }
 
   esconder(): void {

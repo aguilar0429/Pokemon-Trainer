@@ -2,13 +2,13 @@
   position: relative;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-  overflow: hidden;              // ← prevents navbar from overflowing
+  overflow: visible;             // allow dropdowns to overflow
 }
 
 
 
 .navbar-content {
-  width: 100%;
+  width: calc(100% - 40px);
   margin: 0 20px;
   padding: 12px 40px; 
   display: flex;
@@ -29,6 +29,10 @@
 }
 
 .user-dropdown {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   border: 1.5px solid #01426A;
   border-radius: 8px;
   padding: 8px 20px;
@@ -36,9 +40,8 @@
   font-size: 14px;
   color: #01426A;
   cursor: pointer;
-  font-weight: 500;
-  font-weight: bold;
-  
+  font-weight: 700;
+
   mat-icon {
     height: 100%;
     margin-bottom: -3px;
@@ -47,6 +50,42 @@
 
 .user-dropdown:hover {
   border-color: #2B6CB0;
+}
+
+.user-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid rgba(1, 66, 106, 0.18);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  z-index: 20;
+}
+
+.dropdown-item {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 16px;
+  color: #01426A;
+  background: transparent;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1.5px solid #01426A;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.dropdown-item:hover {
+  background: #edf6ff;
 }
 
 .chevron {
@@ -64,4 +103,39 @@
 
 .search-icon {
   color: #01426A;
+}
+
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input-container {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  background: #fff;
+  border: 1px solid rgba(1, 66, 106, 0.18);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
+  padding: 10px 12px;
+  width: 240px;
+  z-index: 20;
+  box-sizing: border-box;
+}
+
+.navbar-search {
+  width: 100%;
+  border: 1px solid #E0E0E0;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #1A3A4A;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.navbar-search:focus {
+  border-color: #2B6CB0;
 }

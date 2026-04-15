@@ -1,5 +1,5 @@
 <app-loading-screen [visible]="showLoading" message="Cargando..."></app-loading-screen>
-<app-navbar [trainerName]="firstName"></app-navbar>
+<app-navbar [trainerName]="firstName" [showSearch]="true" (searchChanged)="onSearchChanged($event)"></app-navbar>
 
 <div class="page-container">
     <!-- Greeting header -->
@@ -26,7 +26,7 @@
             </div>
 
             <div class="pokemon-cards">
-                <div *ngFor="let pokemon of team" class="pokemon-detail-card">
+                <div *ngFor="let pokemon of filteredTeam" class="pokemon-detail-card">
                     <div class="pokemon-info">
                         <img [src]="pokemon.sprite" [alt]="pokemon.nombre" class="pokemon-sprite" />
                         <h3 class="pokemon-name">{{ mayus(pokemon.nombre) }}</h3>

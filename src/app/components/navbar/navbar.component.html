@@ -1,17 +1,33 @@
-
+<app-loading-screen [visible]="showLoading" message="Cargando..."></app-loading-screen>
 <nav class="navbar">
-      <div class="navbar-gradient"></div>
-      <div class="navbar-content">
-        <img src="pokemonLogo.png"
-             alt="Pokemon Logo" class="navbar-logo" />
-        <div class="navbar-right" *ngIf="trainerName">
-          <button class="user-dropdown">
-            {{ trainerName }}
-            <mat-icon class ="chevron">keyboard_arrow_down</mat-icon>
-          </button>
-          <button class="search-btn" aria-label="Search">
-            <mat-icon class="search-icon">search</mat-icon>
-          </button>
+  <div class="navbar-gradient"></div>
+  <div class="navbar-content">
+    <img src="pokemonLogo.png" alt="Pokemon Logo" class="navbar-logo" />
+    <div class="navbar-right" *ngIf="trainerName">
+      <div class="user-dropdown-wrapper">
+        <button class="user-dropdown" (click)="toggleDropdown($event)">
+          {{ trainerName }}
+          <mat-icon class="chevron">keyboard_arrow_down</mat-icon>
+        </button>
+        <div class="dropdown-menu" *ngIf="cerrarSesionVisible" (click)="$event.stopPropagation()">
+          <button class="dropdown-item" (click)="cerrarSesion()">Cerrar sesión</button>
         </div>
       </div>
-    </nav>
+      <div class="search-wrapper" *ngIf="showSearch">
+        <button class="search-btn" aria-label="Search" (click)="toggleSearch($event)">
+          <mat-icon class="search-icon">search</mat-icon>
+        </button>
+        <div class="search-input-container" *ngIf="searchOpen" (click)="$event.stopPropagation()">
+          <input
+            type="text"
+            class="navbar-search"
+            placeholder="Buscar Pokémon..."
+            [value]="searchQuery"
+            (input)="onSearchInput($event)"
+          />
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</nav>

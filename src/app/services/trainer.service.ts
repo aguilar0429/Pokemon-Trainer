@@ -57,6 +57,12 @@ export class TrainerService {
     sessionStorage.setItem(this.TEAM_KEY, JSON.stringify(team));
   }
 
+  clearSession(): void {
+    sessionStorage.clear();
+    this.profileSubject.next(null);
+    this.teamSubject.next([]);
+  }
+
   private loadPerfil(): TrainerProfile | null {
     try {
       const data = sessionStorage.getItem(this.PROFILE_KEY);

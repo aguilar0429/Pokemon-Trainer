@@ -13,16 +13,40 @@
 }
 
 .stat-bar-bg {
+    position: relative;
     flex: 1;
     height: 10px;
     background: #f2f2f2;
     border-radius: 8px;
-    overflow: hidden;
-    border: 3px solid white; 
+    overflow: visible;
+    border: 3px solid white;
 }
 
 .stat-bar-fill {
     height: 100%;
     border-radius: 5px;
     transition: width 0.6s ease;
+}
+
+.stat-tooltip {
+    position: absolute;
+    left: 50%;
+    top: -36px;
+    transform: translateX(-50%);
+    padding: 6px 10px;
+    background: rgba(1, 66, 106, 0.95);
+    color: #fff;
+    font-size: 12px;
+    border-radius: 10px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 10;
+}
+
+.stat-bar-bg:hover .stat-tooltip,
+.stat-bar-bg:focus-within .stat-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-2px);
 }
