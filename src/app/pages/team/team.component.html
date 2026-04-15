@@ -4,6 +4,9 @@
 <div class="page-container">
     <div class="page-header">
         <div>
+            <mat-icon class="chev-left" (click)="regresar()">chevron_left</mat-icon>
+        </div>
+        <div>
             <h1 class="page-title">¡Ya casi terminamos!</h1>
             <p class="page-subtitle">Revisa la información, y completa lo solicitado.</p>
         </div>
@@ -11,8 +14,8 @@
 
     <div class="content-grid">
         <!-- Left: Trainer preview card -->
-       <div class="card-column">
-              <app-tarjeta-entrenador [profile]="perfil" [showNameTop]="true" [showInfo]="true"></app-tarjeta-entrenador> 
+        <div class="card-column">
+            <app-tarjeta-entrenador [profile]="perfil" [showNameTop]="true" [showInfo]="true"></app-tarjeta-entrenador>
         </div>
 
         <!-- Right: Pokemon selection -->
@@ -47,17 +50,17 @@
             <div class="pokemon-grid" *ngIf="!loading && !error">
                 <div *ngFor="let pokemon of pokemonFiltrados" class="pokemon-card"
                     [class.selected]="isSelected(pokemon)" (click)="toggleSelect(pokemon)">
-                    
-                        <img [src]="pokemon.sprite" [alt]="pokemon.nombre" class="pokemon-sprite" loading="lazy"
+
+                    <img [src]="pokemon.sprite" [alt]="pokemon.nombre" class="pokemon-sprite" loading="lazy"
                         *ngIf="pokemon.sprite" />
-                        <div class="pokemon-tag" [class.tag-selected]="isSelected(pokemon)">
-                            {{ formatId(pokemon.id) }} {{ mayus(pokemon.nombre) }}
-                        </div>
-                  
-                    
+                    <div class="pokemon-tag" [class.tag-selected]="isSelected(pokemon)">
+                        {{ formatId(pokemon.id) }} {{ mayus(pokemon.nombre) }}
+                    </div>
+
+
                 </div>
             </div>
-            
+
             <!-- Actions -->
             <div class="form-actions">
                 <button class="btn-primary" [disabled]="equipoSeleccionado.length !== 3" (click)="onSave()">

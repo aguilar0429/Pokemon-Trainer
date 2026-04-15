@@ -92,7 +92,12 @@
   &:focus { border-color: #2B6CB0; }
   &::placeholder { color: #7A8A99; }
 }
-
+.chev-left{
+  font-size:30px;
+  margin-top: 10px;
+  color: #185A7D;
+  cursor:pointer;
+}
 // Loading and error states
 .loading-container, .error-container {
   text-align: center;
