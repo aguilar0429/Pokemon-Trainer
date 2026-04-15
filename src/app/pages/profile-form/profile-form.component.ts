@@ -7,6 +7,8 @@ import { TrainerService } from '../../services/trainer.service';
 import { TrainerProfile } from '../../models/trainer.model';
 import { MatIconModule } from '@angular/material/icon';
 import { LoadingScreenComponent } from '../../components/loading-screen/loading-screen.component';
+import { ChangeDetectorRef } from '@angular/core';
+
 const HOBBY_SUGGESTIONS = [
   'Jugar Fútbol', 'Jugar Basquetball', 'Jugar Tennis',
   'Jugar Voleibol', 'Jugar Fifa', 'Jugar Videojuegos',
@@ -24,6 +26,7 @@ export class ProfileFormComponent implements OnInit {
   form!: FormGroup;
   fotoUrl = '';
   fotoNombre = '';
+  nombre = '';
   fotoError = false;
   hobbySuggestions: string[] = [];
   showSuggestions = false;
@@ -38,7 +41,8 @@ export class ProfileFormComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private router: Router,
-    private trainerService: TrainerService
+    private trainerService: TrainerService,
+    private cd: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -71,10 +75,11 @@ export class ProfileFormComponent implements OnInit {
     if (profile) {
       this.form.patchValue({
         nombre: profile.nombre,
-        hobby: '',
+        hobby: profile.hobby,
         cumple: profile.cumple,
         documento: profile.documento
       });
+      this.nombre = profile.nombre;
       this.selectedHobby = profile.hobby || '';
       this.fotoUrl = profile.fotoUrl;
       this.fotoNombre = profile.fotoNombre;

@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit{
   ngOnInit(): void {
     this.profile = this.trainerService.profile;
     this.team = this.trainerService.team;
-    console.log(this.team)
   }
 
   // Get first name for greeting

@@ -15,7 +15,6 @@ export class StatBarComponent {
   @Input() color = '#4CAF50';
 
   get percentage(): number {
-    console.log(this.value);
     return Math.min((this.value / this.max) * 100, 100);
   }
 }

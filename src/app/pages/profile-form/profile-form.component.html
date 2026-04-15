@@ -50,7 +50,7 @@
           <!-- Name field -->
           <div class="form-field" [class.has-value]="form.get('name')!.value"
             [class.error]="form.get('name')!.touched && form.get('name')!.invalid">
-            <input type="text" formControlName="name" id="name" placeholder=" " />
+            <input type="text" formControlName="name" id="nameInput" placeholder=" " />
             <label for="name">Nombre*</label>
             <span class="field-error" *ngIf="form.get('name')!.touched && form.get('name')!.hasError('required')">
               El nombre es requerido
@@ -67,7 +67,7 @@
                 <button type="button" class="chip-remove" (click)="borrarHobby()" aria-label="Remove hobby">✕</button>
               </span>
               <input *ngIf="!selectedHobby" type="text" formControlName="hobby" id="hobby" placeholder=" "
-                (blur)="esconder()" (focus)="showSuggestions = hobbySuggestions.length > 0" />
+                (blur)="esconder()" (focus)="showSuggestions =true" />
             </div>
             <label for="hobby">Pasatiempo favorito</label>
             <ul class="suggestions-dropdown" *ngIf="showSuggestions && !selectedHobby">

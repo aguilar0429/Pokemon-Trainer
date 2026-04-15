@@ -10,6 +10,7 @@ import { TrainerProfile } from '../../models/trainer.model';
 import { Pokemon } from '../../models/pokemon.model';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'app-team',
